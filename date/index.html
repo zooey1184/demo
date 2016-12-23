@@ -4,11 +4,109 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			
+			#demo {
+				position: relative;
+				width: 80%;
+				margin: 0 auto;
+			}
+			
+			.date {
+				position: relative;
+				padding: 10px;
+				min-width: 640px;
+				max-width: 900px;
+				font-family: "Microsoft YaHei";
+				display: none;
+			}
+			.year {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+			}
+			.week {
+				position: fixed;
+				left: 10%;
+				top: 0;
+				width: 80%;
+				padding-left: 10px;
+				padding-right: 10px;
+				background: #F6F6F6;
+				min-width: 640px;
+				max-width: 900px;
+				z-index: 20;
+			}
+			.month {
+				padding-top: 10px;
+				margin-top: 5px;
+				width: 34px;
+				height: 34px;
+				text-align: center;
+				border-radius: 50%;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				background: #00BCD4;
+				font-size: 12px;
+				color: white;
+				/*border-left: 10px solid #00BCD4;*/
+			}
+			.day {
+				position: relative;
+				top: 38px;
+				width: 100%;
+			}
+			ul {
+				width: 100%;
+			}
+			.year {
+				position: fixed;
+				width: 80%;
+				text-align: center;
+				padding: 10px;
+				top: 40px;
+				left: 10%;
+				background: #DDDDDD;
+				z-index: 22;
+				display: none;
+			}
+			.date li {
+				position: relative;
+				display: inline-block;
+				list-style: none;
+				padding: 10px;
+				text-align: center;
+				width: 14%;
+			}
+			.today {
+				color: crimson;
+			}
+			.start {
+				background: darkturquoise;
+				color: white;
+			}
+			.end {
+				background: #A8AABB;
+				color: white;
+			}
+			hr {
+				/*border-color:#ff0000;*/
+				border-top:1px;
+			}
+		</style>
 		<script src="date.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
+		
 		<div id="demo">
+			<input id="moveIn" type="text" readonly="" placeholder="选择入住时间"/>
+			<input id="moveOut" type="text" readonly="" placeholder="选择离开时间"/>
 			<div class="date">
 				<div class="year">12</div>
 				<div class="week"></div>
@@ -17,3 +115,4 @@
 		</div>
 	</body>
 </html>
+

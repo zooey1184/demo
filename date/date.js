@@ -71,9 +71,9 @@ $(function(){
 			background: "transparent"
 		});//当天之前的样式覆盖空内容的<li>
 		//点击获取日期
-		var yt = $('.today').attr('data-y');//当日的储存值-年
-		var mt = $('.today').attr('data-m');//当日的储存值-月
-		var dt = $('.today').attr('data-d');//当日的储存值-日
+		var yt = parseInt($('.today').attr('data-y'));//当日的储存值-年
+		var mt = parseInt($('.today').attr('data-m'));//当日的储存值-月
+		var dt = parseInt($('.today').attr('data-d'));//当日的储存值-日
 		var moveIn = false;
 		var moveOut = false;
 		$('#moveIn').click(function(){
@@ -90,22 +90,21 @@ $(function(){
 				return
 			}
 			//点击位置的存储日期
-			var dd = $(this).attr('data-d')
-			var mm = $(this).attr('data-m')
-			var yy = $(this).attr('data-y')
+			var dd = parseInt($(this).attr('data-d'))
+			var mm = parseInt($(this).attr('data-m'))
+			var yy = parseInt($(this).attr('data-y'))
 			//入住时间的存储日子
-			var sd = $('.start').attr('data-d')
-			var sm = $('.start').attr('data-m')
-			var sy = $('.start').attr('data-y')
+			var sd = parseInt($('.start').attr('data-d'))
+			var sm = parseInt($('.start').attr('data-m'))
+			var sy = parseInt($('.start').attr('data-y'))
 			//离开时间的存储日期
-			var ed = $('.end').attr('data-d')
-			var em = $('.end').attr('data-m')
-			var ey = $('.end').attr('data-y')
+			var ed = parseInt($('.end').attr('data-d'))
+			var em = parseInt($('.end').attr('data-m'))
+			var ey = parseInt($('.end').attr('data-y'))
 			
 			var len_s = $('.start').length
 			var len_e = $('.end').length
-			var months = parseInt(mm)
-			var datetime = yy+"-"+(months+1)+"-"+dd
+			var datetime = yy+"-"+(mm+1)+"-"+dd
 			//触发了入住条件
 			if(moveIn){
 				if(len_e==0){
@@ -118,13 +117,13 @@ $(function(){
 						return false;
 					}
 				}else {
-					if((yy>yt ||mm>mt ||dd>=dt)&&(yy<=ey && mm<=em && dd<ed)){
+					if(((yy==yt)&&(mm==mt)&&(dd>dt))||((yy==ey)&&(mm<em))||((yy==ey)&&(mm==em)&&(dd<ed))){
 						$(this).addClass('start').siblings().removeClass('start')
 						$(this).parent().siblings('ul').children().removeClass('start')
 						$('.date').fadeOut()
 						$('#moveIn').val(datetime)
 					}else{
-						return false;
+						return;
 					}
 				}
 				moveIn = false
@@ -132,7 +131,7 @@ $(function(){
 			//触发离开条件
 			if(moveOut){
 				if(len_s!=0){
-					if(yy>sy ||mm>sm ||dd>sd){
+					if(yy>sy ||((yy==sy)&&(mm>sm))||((yy==sy)&&(mm==sm)&&(dd>sd))){
 						$(this).addClass('end').siblings().removeClass('end')
 						$(this).parent().siblings('ul').children().removeClass('end')
 						$('.date').fadeOut()
@@ -155,5 +154,9 @@ $(function(){
 			console.log(yy+"--"+mm+"--"+dd)
 		})
 	}
+	
+	
+	
+	//调用方法
 	date(3)
 })

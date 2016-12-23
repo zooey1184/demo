@@ -74,21 +74,84 @@ $(function(){
 		var yt = $('.today').attr('data-y');//当日的储存值-年
 		var mt = $('.today').attr('data-m');//当日的储存值-月
 		var dt = $('.today').attr('data-d');//当日的储存值-日
+		var moveIn = false;
+		var moveOut = false;
+		$('#moveIn').click(function(){
+			$('.date').fadeIn()
+			return moveIn = true
+		})
+		$('#moveOut').click(function(){
+			$('.date').fadeIn()
+			return moveOut = true
+		})
+		//点击日期获取时间
 		$('.day').on("click", "li", function(){
 			if($(this).html()==""){
 				return
 			}
+			//点击位置的存储日期
 			var dd = $(this).attr('data-d')
 			var mm = $(this).attr('data-m')
 			var yy = $(this).attr('data-y')
+			//入住时间的存储日子
+			var sd = $('.start').attr('data-d')
+			var sm = $('.start').attr('data-m')
+			var sy = $('.start').attr('data-y')
+			//离开时间的存储日期
+			var ed = $('.end').attr('data-d')
+			var em = $('.end').attr('data-m')
+			var ey = $('.end').attr('data-y')
+			
 			var len_s = $('.start').length
-			console.log(index)
-			if(yy>yt ||mm>mt ||dd>=dt){
-				$(this).addClass('start').siblings().removeClass('start')
+			var len_e = $('.end').length
+			var months = parseInt(mm)
+			var datetime = yy+"-"+(months+1)+"-"+dd
+			//触发了入住条件
+			if(moveIn){
+				if(len_e==0){
+					if(yy>yt ||mm>mt ||dd>=dt){
+						$(this).addClass('start').siblings().removeClass('start')
+						$(this).parent().siblings('ul').children().removeClass('start')
+						$('.date').fadeOut()
+						$('#moveIn').val(datetime)
+					}else{
+						return false;
+					}
+				}else {
+					if((yy>yt ||mm>mt ||dd>=dt)&&(yy<=ey && mm<=em && dd<ed)){
+						$(this).addClass('start').siblings().removeClass('start')
+						$(this).parent().siblings('ul').children().removeClass('start')
+						$('.date').fadeOut()
+						$('#moveIn').val(datetime)
+					}else{
+						return false;
+					}
+				}
+				moveIn = false
 			}
-			var ds = $('.start').attr('data-d')
-			var ms = $('.start').attr('data-m')
-			var ys = $('.start').attr('data-y')
+			//触发离开条件
+			if(moveOut){
+				if(len_s!=0){
+					if(yy>sy ||mm>sm ||dd>sd){
+						$(this).addClass('end').siblings().removeClass('end')
+						$(this).parent().siblings('ul').children().removeClass('end')
+						$('.date').fadeOut()
+						$('#moveOut').val(datetime)
+					}else {
+						return false;
+					}
+				}else{
+					if(yy>yt ||mm>mt ||dd>dt){
+						$(this).addClass('end').siblings().removeClass('end')
+						$(this).parent().siblings('ul').children().removeClass('end')
+						$('.date').fadeOut()
+						$('#moveOut').val(datetime)
+					}else{
+						return false;
+					}
+				}
+				moveOut = false;
+			}
 			console.log(yy+"--"+mm+"--"+dd)
 		})
 	}

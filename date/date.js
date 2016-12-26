@@ -99,14 +99,7 @@ $(function(){
 			var ed = parseInt($('.end').attr('data-d'))
 			var em = parseInt($('.end').attr('data-m'))
 			var ey = parseInt($('.end').attr('data-y'))
-			function range(){
-				var dateI = new Date(ey, em, ed)
-				var dateII = new Date(sy, sm, sd)
-				var dayI = dateI.getTime()
-				var dayII = dateII.getTime()
-				var ran = parseInt(dayI-dayII)
-				var day_ran = ran/(1000*60*60*24)
-			}
+			
 			var len_s = $('.start').length
 			var len_e = $('.end').length
 			var datetime = yy+"-"+(mm+1)+"-"+dd;//返回在输入款的值
@@ -166,17 +159,17 @@ $(function(){
 			}
 			
 			//点击位置的存储日期
-			var dd = parseInt($(this).attr('data-d'))
-			var mm = parseInt($(this).attr('data-m'))
-			var yy = parseInt($(this).attr('data-y'))
+			dd = parseInt($(this).attr('data-d'))
+			mm = parseInt($(this).attr('data-m'))
+			yy = parseInt($(this).attr('data-y'))
 			//入住时间的存储日子
-			var sd = parseInt($('.start').attr('data-d'))
-			var sm = parseInt($('.start').attr('data-m'))
-			var sy = parseInt($('.start').attr('data-y'))
+			sd = parseInt($('.start').attr('data-d'))
+			sm = parseInt($('.start').attr('data-m'))
+			sy = parseInt($('.start').attr('data-y'))
 			//离开时间的存储日期
-			var ed = parseInt($('.end').attr('data-d'))
-			var em = parseInt($('.end').attr('data-m'))
-			var ey = parseInt($('.end').attr('data-y'))
+			ed = parseInt($('.end').attr('data-d'))
+			em = parseInt($('.end').attr('data-m'))
+			ey = parseInt($('.end').attr('data-y'))
 			//返回两个日期的差值
 			function range(){
 				var dateI = new Date(ey, em, ed)
